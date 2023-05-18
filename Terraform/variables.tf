@@ -8,6 +8,12 @@ variable "rg_name" {
   default = "rg-aci-ghrunners"
 }
 
+variable "vnet_name" {
+  type = string
+  default = "test-vnet"
+  
+}
+
 variable gh_pat {
     default = ""
 }

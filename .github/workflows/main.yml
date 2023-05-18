@@ -20,7 +20,7 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: /home/runner/work/aci-gh-runner-automation
+        working-directory: /home/runner/work/aci-gh-runner-automation/Terraform
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -41,7 +41,7 @@ jobs:
      
      # Run Terraform Init
       - name: Terraform Init for Intial Terraform Config
-        working-directory: /home/runner/work/aci-gh-runner-automation
+        working-directory: /home/runner/work/aci-gh-runner-automation/Terraform
         id: init
         env:
          ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
@@ -55,7 +55,7 @@ jobs:
       
       # Run Terraform Apply with Auto Approve
       - name: Terraform Apply for Intial Terraform Config
-        working-directory: /home/runner/work/aks-zero-trust-demo/aks-zero-trust-demo/Terraform/Intial_Terraform
+        working-directory: /home/runner/work/aci-gh-runner-automation/Terraform
         env:
          ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
          ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}

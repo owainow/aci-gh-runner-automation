@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # This Azure CLI script helps prepare everything you need to run Terraform in GitHub Actions. It Sets up:
 
     # Storage Account and Container to store Terraform State remotely.

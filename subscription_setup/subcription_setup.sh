@@ -17,21 +17,20 @@ az provider register -n Microsoft.Compute
 ########################################
 
 $location = "uksouth"                                           # This sets the Resource Group and Storage Account location.
-$rgname = "rgname"                                              # This sets the Resource Group name the Storage Account will be deployed into.
-$strname = "storageaccoutname"                                  # This sets the Storage Account name - note this must be unique!
+$rgname = "example-rg-name"                                              # This sets the Resource Group name the Storage Account will be deployed into.
+$strname = "example-storage-account-name"                                  # This sets the Storage Account name - note this must be unique!
 $containername = "tfstate"                                      # This sets the Container name.
 $envtag = "Environment=TFStorage"                               # This sets the Environment Tag applied to the Resource Group and Storage Account.
-$datetag = "Build-Date=27072024"                                # This sets the Build Date Tag applied to the Resource Group and Storage Account. 
 $spname = "tfdeploy"                                            # This sets the Service Principal Name
 # Below Subscription should be the Management Subscription
-$mansub = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"                # This is the ID of the Subscription to deploy the Resource Group and Storage Account into. 
+$mansub = ""                # This is the ID of the Subscription to deploy the Resource Group and Storage Account into. 
 
 ########################################
 
 # Creates Resource Group and Storage Account for TF State File Storage
 az account set -s $mansub
-az group create --location $location --name $rgname --tags $envtag $datetag
-az storage account create --location $location --resource-group $rgname --name $strname --tags $envtag $datetag --https-only --sku Standard_LRS --encryption-services blob --subscription $mansub
+az group create --location $location --name $rgname --tags $envtag 
+az storage account create --location $location --resource-group $rgname --name $strname --tags $envtag --https-only --sku Standard_LRS --encryption-services blob --subscription $mansub
 $storageacckey=$(az storage account keys list --resource-group $rgname --account-name $strname --query '[0].value' -o tsv)
 az storage container create --name $containername --account-name $strname --account-key $storageacckey
 

@@ -8,22 +8,19 @@
  
 az login
 
-## Required for confidential compute & FIPS nodepool
-az feature register --name EncryptionAtHost --namespace Microsoft.Compute 
-az provider register -n Microsoft.Compute
 
 ########################################
 # Set the below
 ########################################
 
-$location = "uksouth"                                           # This sets the Resource Group and Storage Account location.
-$rgname = "example-rg-name"                                              # This sets the Resource Group name the Storage Account will be deployed into.
-$strname = "example-storage-account-name"                                  # This sets the Storage Account name - note this must be unique!
-$containername = "tfstate"                                      # This sets the Container name.
-$envtag = "Environment=TFStorage"                               # This sets the Environment Tag applied to the Resource Group and Storage Account.
-$spname = "tfdeploy"                                            # This sets the Service Principal Name
+export location="uksouth"                                           # This sets the Resource Group and Storage Account location.
+export rgname="example-rg-name"                                              # This sets the Resource Group name the Storage Account will be deployed into.
+export strname="oowghexample"                                  # This sets the Storage Account name - note this must be unique!
+export containername="tfstate"                                      # This sets the Container name.
+export envtag="Environment=TFStorage"                               # This sets the Environment Tag applied to the Resource Group and Storage Account.
+export spname="tfdeploy"                                            # This sets the Service Principal Name
 # Below Subscription should be the Management Subscription
-$mansub = ""                # This is the ID of the Subscription to deploy the Resource Group and Storage Account into. 
+export mansub="xxxx-xxxx-xxxx-xxxx-xxxx"                # This is the ID of the Subscription to deploy the Resource Group and Storage Account into. 
 
 ########################################
 
@@ -31,11 +28,11 @@ $mansub = ""                # This is the ID of the Subscription to deploy the R
 az account set -s $mansub
 az group create --location $location --name $rgname --tags $envtag 
 az storage account create --location $location --resource-group $rgname --name $strname --tags $envtag --https-only --sku Standard_LRS --encryption-services blob --subscription $mansub
-$storageacckey=$(az storage account keys list --resource-group $rgname --account-name $strname --query '[0].value' -o tsv)
+export storageacckey=$(az storage account keys list --resource-group $rgname --account-name $strname --query '[0].value' -o tsv)
 az storage container create --name $containername --account-name $strname --account-key $storageacckey
 
 # Creates Service Principal for TF to use and gives access at root. 
-$spid = az ad sp create-for-rbac -n $spname --role Owner --scopes  /subscriptions/$mansub
+export spid= az ad sp create-for-rbac -n $spname --role Owner --scopes  /subscriptions/$mansub
 
 ########################################
 # Information to setup GitHub Secrets and Terraform backend configuration is output by the script below. 

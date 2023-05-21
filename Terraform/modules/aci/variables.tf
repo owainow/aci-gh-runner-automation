@@ -4,12 +4,12 @@ variable location {
 } 
 variable resourceGroupName {
   type=string
-  default="oow-aks-zero-trust-demo"
+  default=""
 } 
 
 variable vnetName {
     type = string
-    default = "vnet-oow-zerotrust"
+    default = ""
 }
 
 variable gh_pat {

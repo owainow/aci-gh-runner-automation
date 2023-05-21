@@ -36,7 +36,7 @@ resource "azurerm_container_group" "self_hosted_runners" {
     environment_variables = {"GH_REPO_URL":var.gh_repo_url, "GH_PAT":var.gh_pat}
 
     ports {
-      port     = 443
+      port     = 443 # Not open as private but required for tf creation
       protocol = "TCP"
     }
       

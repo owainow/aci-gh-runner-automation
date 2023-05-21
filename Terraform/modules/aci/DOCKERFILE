@@ -6,6 +6,6 @@ apt-get install curl -y && \
 apt-get install dotnet-sdk-6.0 -y && \
 apt-get install tar && \
 DEBIAN_FRONTEND=noninteractive apt-get install git -y
-RUN git clone https://github.com/owainow/aks-zero-trust-demo.git
-RUN chmod +x /aks-zero-trust-demo/Terraform/Intial_Terraform/modules/aci/scripts/configureLinuxRunner.sh
-ENTRYPOINT /aks-zero-trust-demo/Terraform/Intial_Terraform/modules/aci/scripts/configureLinuxRunner.sh
+RUN git clone https://github.com/owainow/aci-gh-runner-automation.git
+RUN chmod +x /aci-gh-runner-automation/Terraform/modules/aci/scripts/configureLinuxRunner.sh
+ENTRYPOINT /aci-gh-runner-automation/Terraform/modules/aci/scripts/configureLinuxRunner.sh

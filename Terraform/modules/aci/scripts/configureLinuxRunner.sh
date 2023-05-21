@@ -13,5 +13,3 @@ export RUNNER_ALLOW_RUNASROOT=1
 nohup ./run.sh
 
 sleep 60
-
-# Create me an azure VM using arm 

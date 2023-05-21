@@ -1,4 +1,4 @@
 output userClientId {
-  value = module.aci.self_hosted_runners.name
+  value = module.aci.name
   description = "Container name"
 }

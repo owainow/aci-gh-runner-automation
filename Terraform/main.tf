@@ -34,6 +34,8 @@ resource "azurerm_resource_group" "rg" {
 resource "azurerm_virtual_network" "vnet" {
   name                = var.vnet_name
   address_space       = ["10.240.10.0/24"]
+  resource_group_name = var.rg_name
+  location = var.location
 }
 
 module "aci" {

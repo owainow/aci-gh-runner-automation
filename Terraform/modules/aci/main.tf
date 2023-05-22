@@ -38,7 +38,7 @@ resource "azurerm_container_group" "self_hosted_runners" {
       GH_PAT = var.gh_pat
     }
     ports {
-      port     = 443 # Not open as private but required for tf creation
+      port     = 80 # Not open as private but required for tf creation
       protocol = "TCP"
     }
       
